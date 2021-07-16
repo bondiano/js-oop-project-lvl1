@@ -7,4 +7,8 @@ export default class Validator {
   string() {
     return new schemas.StringSchema();
   }
+
+  number() {
+    return new schemas.NumberSchema();
+  }
 }

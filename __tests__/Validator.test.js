@@ -23,4 +23,27 @@ describe('Validator', () => {
     expect(schema.isValid('simple dimple pop it squish')).toBe(true);
     expect(schema.isValid('squish')).toBe(false);
   });
+
+  it('number', () => {
+    const validator = new Validator();
+    const schema = validator.number();
+
+    expect(schema.isValid(null)).toBe(true);
+    expect(schema.isValid(5)).toBe(true);
+
+    schema.required();
+
+    expect(schema.isValid(7)).toBe(true);
+    expect(schema.isValid(null)).toBe(false);
+
+    schema.positive();
+
+    expect(schema.isValid(10)).toBe(true);
+    expect(schema.isValid(-10)).toBe(false);
+
+    schema.range(-5, 5);
+
+    expect(schema.isValid(3)).toBe(true);
+    expect(schema.isValid(6)).toBe(false);
+  });
 });

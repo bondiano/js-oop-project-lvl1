@@ -7,10 +7,6 @@ export default class BaseSchema {
     this.checks = [];
   }
 
-  setupChecks() {
-
-  }
-
   addCheck(name, ...args) {
     const validate = this.validators[name];
 
