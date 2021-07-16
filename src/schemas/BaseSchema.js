@@ -32,4 +32,9 @@ export default class BaseSchema {
       return validate(value, ...args);
     });
   }
+
+  test(name, ...args) {
+    this.addCheck(name, ...args);
+    return this;
+  }
 }

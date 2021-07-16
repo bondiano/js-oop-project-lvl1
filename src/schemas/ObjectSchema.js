@@ -3,8 +3,8 @@ import _ from 'lodash';
 import BaseSchema from './BaseSchema.js';
 
 export default class ObjectSchema extends BaseSchema {
-  constructor() {
-    super(ObjectSchema.validators);
+  constructor(customValidators) {
+    super({ ...ObjectSchema.validators, customValidators });
   }
 
   shape(schemas) {

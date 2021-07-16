@@ -86,4 +86,21 @@ describe('Validator', () => {
     expect(schema.isValid({ name: '', age: null })).toBe(false);
     expect(schema.isValid({ name: 'ada', age: -5 })).toBe(false);
   });
+
+  it('addValidator', () => {
+    const validator = new Validator();
+    const startsWith = (value, start) => value.startsWith(start);
+    validator.addValidator('string', 'startWith', startsWith);
+
+    const schema = validator.string().test('startWith', 'H');
+    expect(schema.isValid('Hexlet')).toBe(true);
+    expect(schema.isValid('exlet')).toBe(false);
+
+    const min = (value, minimum) => value >= minimum;
+    validator.addValidator('number', 'min', min);
+
+    const minSchema = validator.number().test('min', 5);
+    expect(minSchema.isValid(6)).toBe(true);
+    expect(minSchema.isValid(4)).toBe(false);
+  });
 });

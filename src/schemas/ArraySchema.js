@@ -3,8 +3,8 @@
 import BaseSchema from './BaseSchema';
 
 export default class ArraySchema extends BaseSchema {
-  constructor() {
-    super(ArraySchema.validators);
+  constructor(customValidators) {
+    super({ ...ArraySchema.validators, ...customValidators });
   }
 }
 

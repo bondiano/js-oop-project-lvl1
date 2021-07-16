@@ -5,8 +5,8 @@ import _ from 'lodash';
 import BaseSchema from './BaseSchema';
 
 export default class NumberSchema extends BaseSchema {
-  constructor() {
-    super(NumberSchema.validators);
+  constructor(customValidators) {
+    super({ ...NumberSchema.validators, ...customValidators });
   }
 }
 
