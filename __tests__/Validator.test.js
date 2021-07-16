@@ -46,4 +46,20 @@ describe('Validator', () => {
     expect(schema.isValid(3)).toBe(true);
     expect(schema.isValid(6)).toBe(false);
   });
+
+  it('array', () => {
+    const validator = new Validator();
+    const schema = validator.array();
+
+    schema.required();
+
+    expect(schema.isValid([])).toBe(true);
+    expect(schema.isValid(['hexlet'])).toBe(true);
+    expect(schema.isValid(null)).toBe(false);
+
+    schema.sizeof(2);
+
+    expect(schema.isValid(['hexlet', 'code-basics'])).toBe(true);
+    expect(schema.isValid(['hexlet'])).toBe(false);
+  });
 });

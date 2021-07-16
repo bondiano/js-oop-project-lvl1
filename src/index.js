@@ -11,4 +11,8 @@ export default class Validator {
   number() {
     return new schemas.NumberSchema();
   }
+
+  array() {
+    return new schemas.ArraySchema();
+  }
 }
