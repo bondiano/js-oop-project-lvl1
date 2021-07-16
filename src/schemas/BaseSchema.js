@@ -1,10 +1,19 @@
-/* eslint-disable class-methods-use-this */
-// @ts-check
-
 export default class BaseSchema {
   constructor(validators) {
     this.validators = validators;
     this.checks = [];
+
+    const Schema = this.constructor;
+    Object.keys(validators).forEach((name) => {
+      Object.defineProperty(Schema.prototype, name, {
+        value(...args) {
+          this.addCheck(name, ...args);
+          return this;
+        },
+        enumerable: true,
+        configurable: true,
+      });
+    });
   }
 
   addCheck(name, ...args) {

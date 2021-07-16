@@ -2,15 +2,11 @@
 
 import _ from 'lodash';
 
-import { setupChecks } from './helpers.js';
-
 import BaseSchema from './BaseSchema';
 
 export default class StringSchema extends BaseSchema {
   constructor() {
     super(StringSchema.validators);
-
-    setupChecks(StringSchema);
 
     super.addCheck('isString');
   }

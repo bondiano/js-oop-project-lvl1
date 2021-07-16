@@ -45,6 +45,8 @@ describe('Validator', () => {
 
     expect(schema.isValid(3)).toBe(true);
     expect(schema.isValid(6)).toBe(false);
+
+    expect(validator.number().positive().isValid(null)).toBe(true);
   });
 
   it('array', () => {
@@ -61,5 +63,27 @@ describe('Validator', () => {
 
     expect(schema.isValid(['hexlet', 'code-basics'])).toBe(true);
     expect(schema.isValid(['hexlet'])).toBe(false);
+  });
+
+  it('object', () => {
+    const validator = new Validator();
+    const schema = validator.object();
+
+    expect(schema.isValid(null)).toBe(true);
+
+    schema.required();
+
+    expect(schema.isValid({})).toBe(true);
+    expect(schema.isValid(null)).toBe(false);
+
+    schema.shape({
+      name: validator.string().required(),
+      age: validator.number().positive(),
+    });
+
+    expect(schema.isValid({ name: 'kolya', age: 100 })).toBe(true);
+    expect(schema.isValid({ name: 'maya', age: null })).toBe(true);
+    expect(schema.isValid({ name: '', age: null })).toBe(false);
+    expect(schema.isValid({ name: 'ada', age: -5 })).toBe(false);
   });
 });
